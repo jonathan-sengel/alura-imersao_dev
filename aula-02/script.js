@@ -34,7 +34,6 @@ let pokemon;
 
 function loadPoke() {
     showPokemon();
-    
     respFocus();
 }
 

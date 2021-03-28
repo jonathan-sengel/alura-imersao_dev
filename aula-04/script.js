@@ -7,19 +7,23 @@ const urlPopular = 'https://api.themoviedb.org/3/movie/popular?api_key=eda6d9a6a
 
 const urlUpcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=1'
 
-const urlTopRated = 'https://api.themoviedb.org/3/movie/top_rated?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=1';
+const urlTopRated = 'https://api.themoviedb.org/3/movie/top_rated?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=3';
+
+let moviesInCinema;
+let popularMovies;
+let upComingMovies;
+let topRatedMovies;
+
 //#endregion
 
 //#region ELEMENTS EVENTS
-function charge() {
+async function charge() {
     // 500ms após o load do Body, ele chama os metodos para criar os catalogos na pagina
-    setTimeout(() => {
-        generateInTheCineCatalog(moviesInCinema);
-        generateListCatalog('.movies-list.movies-list__popular', popularMovies);
-        generateListCatalog('.movies-list.movies-list__latest', upComingMovies);
-        generateListCatalog('.movies-list.movies-list__top-rated', ordenar(topRatedMovies));
-
-    }, 500);
+    await receberVariaveis();
+    generateInTheCineCatalog(moviesInCinema);
+    generateListCatalog('.movies-list.movies-list__popular', popularMovies);
+    generateListCatalog('.movies-list.movies-list__latest', upComingMovies);
+    generateListCatalog('.movies-list.movies-list__top-rated', ordenar(topRatedMovies));
 }
 
 function showHideMobileMenu(e) {
@@ -135,13 +139,13 @@ function createMovieInfo() {
 //==================================== IN CINE LIST ==========================================
 
 let isActived = {};
-const moviesInCinema = getNowPlaying();
 
 
 
-function getNowPlaying() {
+
+async function getNowPlaying() {
     const nowPlayingMovies = [];
-    fetch(urlNowPlaying).then(resp => {
+    await fetch(urlNowPlaying).then(resp => {
         return resp.json();
     }).then(movies => {
         movies.results.forEach(movie => nowPlayingMovies.push(movie));
@@ -192,12 +196,11 @@ function setToActive(event) {
 
 //=================================== POPULAR LIST ==========================================*/
 
-const popularMovies = getPopularList();
 
-function getPopularList() {
+async function getPopularList() {
 
     const popularListMovies = [];
-    fetch(urlPopular).then(resp => {
+    await fetch(urlPopular).then(resp => {
         return resp.json();
     }).then(movies => {
         movies.results.forEach(movie => popularListMovies.push(movie));
@@ -207,12 +210,12 @@ function getPopularList() {
 
 //=================================== UPCOMING LIST ==========================================*/
 
-const upComingMovies = getUpcomingList();
 
-function getUpcomingList() {
+
+async function getUpcomingList() {
 
     const upcomingListMovies = [];
-    fetch(urlUpcoming).then(resp => {
+    await fetch(urlUpcoming).then(resp => {
         return resp.json();
     }).then(movies => {
         movies.results.forEach(movie => upcomingListMovies.push(movie));
@@ -222,12 +225,12 @@ function getUpcomingList() {
 
 //=================================== TOP RATED LIST ==========================================*/
 
-const topRatedMovies = getTopRatedList();
 
-function getTopRatedList() {
+
+async function getTopRatedList() {
 
     const topRatedListMovies = [];
-    fetch(urlTopRated).then(resp => {
+    await fetch(urlTopRated).then(resp => {
         return resp.json();
     }).then(movies => {
         movies.results.forEach(movie => topRatedListMovies.push(movie));
@@ -250,4 +253,12 @@ function ordenar(lista) {
         return 0;
     });
     return lista;
+}
+
+
+async function receberVariaveis() {
+    moviesInCinema = await getNowPlaying();
+    popularMovies = await getPopularList();
+    upComingMovies = await getUpcomingList();
+    topRatedMovies = await getTopRatedList();
 }
