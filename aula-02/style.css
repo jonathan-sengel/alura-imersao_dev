@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1.2;
+    overflow-x: hidden;
+    background-color: #3466AF;
+}
+
+/*
+========== QUESTION ========== */
+
+.modal {
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.438);
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+    margin-top: 10px;
+    font-size: 20px;
+    background-color: #FFCB05;
+}
+
+.question--error {
+    animation: wobble-hor-bottom 0.8s both;
+}
+
+.question h2, span {
+    color: #3466AF;
+    margin-bottom: 5px;
+}
+
+.question__resp {
+    padding: 10px;
+    font-size: 16px;
+    width: 186px;
+    margin-bottom: 10px;
+    border: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: transform .3s;
+    outline: 0;
+}
+
+.question__resp:focus {
+    box-shadow: 2px 2px 10px black;
+    transform: scale(1.1);
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+}
+
+.question__btn {
+    padding: 5px 10px;
+    background-color: #3466AF;
+    color: whitesmoke;
+    margin-bottom: 5px;
+    transition: transform .3s;
+}
+
+.interation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 5px;
+    background-color: #3466AF;
+}
+
+.question__btn-restart {
+    margin-left: 5px;
+}
+
+.question__btn-tip {
+    margin-right: 5px;
+}
+
+.question__btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.modal--inactive {
+    opacity: 0;
+    display: none;
+}
+
+/*
+========== POKEDEX ========== */
+
+.pokedex {
+    width: 800px;
+    height: 450px;
+    display: flex;
+    margin-top: 10px;
+    box-shadow: 0px 0px 15px;
+    background: linear-gradient(-45deg, #fa916a, #F45237, #fa916a);
+}
+
+/*
+========== MEDIA ========== */
+
+.media {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(0);
+    transition: .5s;
+}
+
+.media__sprite {
+    /* transform: scale(2); */
+    width: 340px;
+}
+
+.media--active {
+    width: 45%;
+    filter: brightness(1);
+    animation: jello-vertical 1.2s both;
+}
+
+/*
+========== INFO ========== */
+
+.result__info {
+    width: 55%;
+    display: flex;
+    opacity: 0;
+    right: -1000px;
+    position: absolute;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.result__info--active {
+    opacity: 1;
+    position: static;
+}
+
+.info__name {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.801);
+    color: whitesmoke;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.container {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 2px;
+    background-color: whitesmoke;
+}
+
+.info__number {
+    text-align: center;
+    background-color: lightgray;
+}
+
+#type {
+    text-transform: uppercase;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+    padding: 5px;
+}
+
+td:nth-child(1) {
+    background-color: lightgray;
+    border-bottom: 1px solid rgb(194, 192, 192);
+    text-align: center;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.info__description {
+    max-height: 160px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.moves {
+    text-align: left;
+}
+
+/*
+========== RESTART ========== */
+
+.restart {
+    display: none;
+    width: 800px;
+    line-height: 60px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #FFCB05;
+    color: #3466AF;
+    transition: transform .3s;
+}
+
+.restart:hover {
+    cursor: pointer;
+    transform: scale(.95);
+}
+
+.restart--active {
+    display: block;
+}
+
+@keyframes wobble-hor-bottom {
+    0%, 100% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+        -webkit-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+    }
+    15% {
+        -webkit-transform: translateX(-30px) rotate(-6deg);
+        transform: translateX(-30px) rotate(-6deg);
+    }
+    30% {
+        -webkit-transform: translateX(15px) rotate(6deg);
+        transform: translateX(15px) rotate(6deg);
+    }
+    45% {
+        -webkit-transform: translateX(-15px) rotate(-3.6deg);
+        transform: translateX(-15px) rotate(-3.6deg);
+    }
+    60% {
+        -webkit-transform: translateX(9px) rotate(2.4deg);
+        transform: translateX(9px) rotate(2.4deg);
+    }
+    75% {
+        -webkit-transform: translateX(-6px) rotate(-1.2deg);
+        transform: translateX(-6px) rotate(-1.2deg);
+    }
+}
+
+@keyframes jello-vertical {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(0.85, 1.15, 1);
+        transform: scale3d(0.85, 1.15, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@media only screen and (max-width:820px) {
+    body {
+        flex-direction: column-reverse;
+    }
+    .pokedex {
+        flex-direction: column;
+        height: auto;
+        width: 95%;
+    }
+    .question>h2 {
+        font-size: 1.3rem;
+    }
+    .media {
+        width: 100%;
+    }
+    .media__sprite {
+        /* transform: scale(2); */
+        width: 250px;
+    }
+    .result__info {
+        width: 100%;
+    }
+    .restart {
+        width: 95%;
+    }
+}
+
+@media only screen and (min-width:821px) and (max-height: 768px) {
+    body {
+        justify-content: flex-end;
+        padding-bottom: 10px;
+    }
+}
