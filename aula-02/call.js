@@ -1,10 +1,10 @@
 const gerarUrl = () => { return 'https://pokeapi.co/api/v2/pokemon/' + Math.ceil(Math.random() * 251); }
 
-function getPokemon(url) {
+async function getPokemon(url) {
 
     const pokemon = {};
 
-    fetch(url).then(response => response.json()).then(poke => {
+    await fetch(url).then(response => response.json()).then(poke => {
         pokemon.name = poke.name;
         pokemon.types = poke.types.map(type => {
             return type.type.name;
@@ -17,6 +17,8 @@ function getPokemon(url) {
         pokemon.moves = poke.moves.map(move => {
             return move.move.name;
         });
-    })
+    });
+    
+
     return pokemon;
 }

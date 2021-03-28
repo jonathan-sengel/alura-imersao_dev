@@ -1,3 +1,4 @@
+//#region variaveis
 const $btnResp = document.querySelector('.question__btn');
 $btnResp.addEventListener('click', showStats);
 const $btnRestart = document.querySelector('.restart');
@@ -26,15 +27,15 @@ const $height = document.querySelector('#height');
 const $weight = document.querySelector('#weight');
 const $movesList = document.querySelector('.moves');
 let $span = $questionBlock.querySelector('span');
-let pokemon = getPokemon(gerarUrl());
+//#endregion
+
+let pokemon;
 
 
 function loadPoke() {
-    setTimeout(() => {
-        showPokemon();
-        $modal.classList.toggle('modal--inactive');
-        respFocus();
-    }, 250);
+    showPokemon();
+    
+    respFocus();
 }
 
 function pushHelp() {
@@ -42,13 +43,15 @@ function pushHelp() {
     let nameF = pokemon.name.substr((qtd / 2));
     let nameR = pokemon.name;
 
-    for(l of nameF){
-        nameR = nameR.replaceAll(l,'-');
+    for (l of nameF) {
+        nameR = nameR.replaceAll(l, '-');
     }
     $qResp.value = nameR;
 }
 
-function showPokemon() {
+async function showPokemon() {
+    pokemon = await getPokemon(gerarUrl())
+    console.log(pokemon.name);
     $sprite.src = pokemon.image;
     $name.textContent = pokemon.name;
     $number.textContent = 'No. ' + pokemon.number;
@@ -112,6 +115,7 @@ function restartGame() {
     pokemon = getPokemon(gerarUrl());
     clearFields();
     loadPoke();
+    $modal.classList.toggle('modal--inactive');
     $span.innerHTML = '';
     respFocus();
 }
