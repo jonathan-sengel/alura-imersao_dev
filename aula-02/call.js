@@ -19,6 +19,5 @@ async function getPokemon(url) {
         });
     });
     
-
     return pokemon;
 }
