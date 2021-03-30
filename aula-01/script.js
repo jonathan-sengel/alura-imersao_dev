@@ -9,7 +9,7 @@ $options.forEach(item => {
 const $input = document.querySelector('.info-input');
 $input.addEventListener('keydown', verifyEnter);
 
-let choice;
+let choice='';
 
 
 const planets = [
@@ -56,9 +56,9 @@ const planets = [
 ]
 
 function calcularResultado(e) {
-    let $input = Number(document.querySelector('.info-input').value);
+    let $input = Number(document.querySelector('.info-input').value.trim());
 
-    if (!$input == '') {
+    if ($input != '' && choice !='') {
         for (planet of planets) {
 
             if (choice === "weight") {
@@ -78,12 +78,16 @@ function calcularResultado(e) {
             }
 
             if (choice === "name") {
-                $input = document.querySelector('.info-input').value;
-                let nome = $input + planet.name.shuffle();
+                $input = document.querySelector('.info-input').value.toLowerCase();
+                let nomeRandom = $input + planet.name.shuffle();
                 let elemento = document.querySelector(`#${planet.name}`);
                 elemento.querySelector('h2').textContent = `${planet.name}`;
                 elemento.querySelector('h3').textContent = `seu nome é:`;
-                elemento.querySelector('h4').innerHTML = `<mark>${nome.shuffle().capitalize()}</mark>`;
+                if(planet.name == 'terra'){
+                  elemento.querySelector('h4').innerHTML = `<mark>${$input.capitalize()}</mark>`;
+                }else{
+                  elemento.querySelector('h4').innerHTML = `<mark>${nomeRandom.shuffle().capitalize()}</mark>`;
+                }
             }
         }
     } else {
@@ -109,7 +113,7 @@ function optionSelect(e) {
             break;
         case '3': choice = 'name';
             $input.type = 'text';
-            $input.placeholder = 'digite sua idade';
+            $input.placeholder = 'digite seu nome';
             break;
         default: console.log('Algo errado');
             break;
@@ -138,7 +142,6 @@ String.prototype.capitalize = function () {
 }
 
 function verifyEnter(e) {
-    console.log(e.key);
     if (e.key == 'Enter') {
         calcularResultado();
     }

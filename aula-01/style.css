@@ -6,6 +6,7 @@
 }
 
 body {
+background: linear-gradient(135deg, rgba(38,17,6,1) 0%,  rgba(36,0,70,1) 50%, rgba(38,17,6,1) 100%);
     min-height: 100vh;
     font-family: 'Russo One', sans-serif;
 }
@@ -16,9 +17,16 @@ h2 {
 }
 
 mark {
-    color: #cfdbd5;
-    background-color: #242423;
+    color: #242423;
+    background-color: #cfdbd5;
     padding: 0 5px;
+}
+
+a{
+  text-decoration: none;
+}
+a:visited{
+  color:#242423;
 }
 
 .container {
@@ -27,7 +35,7 @@ mark {
     align-items: center;
     width: 100%;
     min-height: 100%;
-    background-color: #adb5bd;
+/*     background-color: #adb5bd; */
 }
 
 .title-box {
@@ -109,7 +117,7 @@ mark {
     display: grid;
     justify-content: center;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .planets {
@@ -134,6 +142,7 @@ mark {
     font-family: 'Abel', sans-serif;
     padding-bottom: 10px;
     text-align: center;
+  color: #cfdbd5;
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -149,7 +158,10 @@ input[type=number] {
     border: 6px solid #fb8500;
     transform: scale(.90);
 }
-
+#footer-info{
+  color: #cfdbd5;
+  margin:10px;
+}
 @keyframes rotatePlanet {
     to {
         transform: rotate(360deg);
