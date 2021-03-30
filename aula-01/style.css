@@ -1,13 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Russo+One&display=swap');
 * {
     margin: 0;
     bottom: 0;
     box-sizing: border-box;
-    font-family: 'Russo One', sans-serif;
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
+    font-family: 'Russo One', sans-serif;
+}
+
+h2 {
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+mark {
+    color: #cfdbd5;
+    background-color: #242423;
+    padding: 0 5px;
 }
 
 .container {
@@ -15,7 +26,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-color: #adb5bd;
 }
 
@@ -55,13 +66,14 @@ body {
 .item-box:hover {
     transform: scale(.90);
     -webkit-transform: scale(.90);
+    cursor: pointer;
 }
 
 .old {
     box-shadow: -8px 8px 0px 0px #242423;
 }
 
-.weight {
+.weight, input {
     box-shadow: 0px 8px 0px 0px #242423;
 }
 
@@ -95,7 +107,9 @@ body {
 
 .result {
     display: grid;
+    justify-content: center;
     grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
 }
 
 .planets {
@@ -113,4 +127,70 @@ body {
 .pic {
     width: 128px;
     padding: 20px;
+    animation: rotatePlanet 60s linear infinite;
+}
+
+.result-info {
+    font-family: 'Abel', sans-serif;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.selected {
+    border: 6px solid #fb8500;
+    transform: scale(.90);
+}
+
+@keyframes rotatePlanet {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .title-box {
+        text-align: center;
+    }
+    main {
+        max-width: 100%;
+        height: 100%;
+    }
+    #items {
+        justify-content: center;
+        text-align: center;
+        padding: 0 5px;
+    }
+    .item-box {
+        font-size: 20px;
+    }
+    .inputs {
+        max-width: 100%;
+        padding: 0 5px;
+    }
+    .inputs>input {
+        font-size: 18px;
+    }
+    input.btn {
+        margin: 0;
+    }
+    .planets {
+        flex-direction: column;
+        ;
+    }
+    .planets:nth-child(2n) {
+        flex-direction: column;
+        ;
+    }
+    h2 {
+        margin-bottom: 5px;
+    }
 }
