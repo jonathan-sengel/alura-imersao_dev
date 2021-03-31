@@ -8,6 +8,7 @@ let lastRandom;
 let randomMove = randomNum();
 let win = false;
 let correctColorElement = $colors[randomMove];
+const colorsNamesList = ['Navy', 'SeaGreen', 'Goldenrod', 'BlueViolet', 'Salmon', 'Gold', 'HotPink', 'DeepSkyBlue', 'Chocolate', 'OliveDrab', 'SteelBlue', 'FireBrick'];
 
 $colors.forEach((color, index) => {
     color.addEventListener('click', validateColor);
@@ -19,7 +20,7 @@ function validateColor(e) {
     const elementClicked = e.target;
     let correctColor = window.getComputedStyle(correctColorElement, null).getPropertyValue('background-color');
 
-    if(elementClicked.className.indexOf('clicked') != -1){
+    if (elementClicked.className.indexOf('clicked') != -1) {
         return;
     }
 
@@ -31,13 +32,13 @@ function validateColor(e) {
             document.body.style.backgroundColor = correctColor;
             changeStyleH2Win()
         } else {
-            elementClicked.classList.add('wrong','clicked');
+            elementClicked.classList.add('wrong', 'clicked');
             coins -= 1;
             $resultH2.innerText = `Jogadas restantes: ${coins}`
-            
+
         }
         if (coins <= 0) {
-            $resultH2.innerHTML = `Suas tentativas acabaram, a cor correta era <br><mark style="background-color:${correctColor};color:#f8f7ff;">${correctColor}</mark>`;
+            $resultH2.innerHTML = `Suas tentativas acabaram, a cor correta era <br><mark style="background-color:${correctColor};color:#f8f7ff;">${colorsNamesList[randomMove]}</mark>`;
             correctColorElement.classList.add('correct-color');
         }
     } else {
@@ -52,7 +53,7 @@ function restartGame() {
     win = false;
     correctColorElement = $colors[randomMove];
     $colors.forEach(color => {
-        color.classList.remove('correct','wrong','clicked','correct-color');
+        color.classList.remove('correct', 'wrong', 'clicked', 'correct-color');
     })
     document.body.style.backgroundColor = '#000814e1';
     $resultH2.innerText = `Jogadas restantes: ${coins}`;

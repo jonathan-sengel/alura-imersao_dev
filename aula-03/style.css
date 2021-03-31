@@ -52,7 +52,7 @@ h1 {
     padding: 0 20px
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
@@ -82,7 +82,7 @@ main {
 }
 
 #restart {
-    margin-top:10px;
+    margin-top: 10px;
     font-size: 32px;
     transition: transform .5s;
 }
@@ -103,56 +103,58 @@ main {
     padding: 0 5px;
 }
 
-.correct-color{
+.correct-color {
     border: 8px solid orange;
     transform: scale(1.2);
     z-index: 3;
 }
 
 .cor0 {
-    background-color: #000080d0;
+    background-color: #000080;
 }
 
 .cor1 {
-    background-color: #2E8B57d0;
+    background-color: #2E8B57;
 }
 
 .cor2 {
-    background-color: #DAA520d0;
+    background-color: #DAA520;
 }
 
 .cor3 {
-    background-color: #8A2BE2d0;
+    background-color: #8A2BE2;
 }
 
 .cor4 {
-    background-color: #FA8072d0;
+    background-color: #FA8072;
 }
 
 .cor5 {
-    background-color: #FFD700d0;
+    background-color: #FFD700;
 }
 
 .cor6 {
-    background-color: #FF69B4d0;
+    background-color: #FF69B4;
 }
 
 .cor7 {
-    background-color: #00BFFFd0;
+    background-color: #00BFFF;
 }
 
 .cor8 {
-    background-color: #D2691Ed0;
+    background-color: #D2691E;
 }
 
 .cor9 {
-    background-color: #6B8E23d0;
+    background-color: #6B8E23;
 }
+
 .cor10 {
-    background-color: #144483d0;
+    background-color: #4682B4;
 }
+
 .cor11 {
-    background-color: #c52914d0;
+    background-color: #B22222;
 }
 
 footer {
