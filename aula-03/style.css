@@ -64,7 +64,7 @@ main {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(5, 120px);
+    grid-template-columns: repeat(6, 120px);
     grid-template-rows: 120px 120px;
     gap: 10px;
     padding: 10px;
