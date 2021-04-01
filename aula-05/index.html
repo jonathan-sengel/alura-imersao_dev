@@ -44,6 +44,14 @@
             </div>
         </div>
     </div>
+    <div class="movies-list movies-list__favorite">
+        <span>
+            <span id="personal">Seus filmes</span><span class="add-movie">Add</span>
+        </span>
+        <div class="movies__container">
+
+        </div>
+    </div>
 
     <div class="movies-list movies-list__popular">
         <span id="popular">Todo mundo está assistindo:</span>
@@ -55,7 +63,7 @@
         <div class="movies__container"></div>
     </div>
 
-    
+
     <div class="movies-list movies-list__top-rated">
         <span id="top-r">Melhores avaliados:</span>
         <div class="movies__container"></div>
@@ -64,12 +72,15 @@
 
     <div class="modal-container">
         <div class="modal-box">
-            <input class="search-input" type="text" name="search" id="search">
-            <div class="result-container">
-                <ul class="result-list">
-                </ul>
-            </div>
-            <input class='btn-add-movie' type="button" value="Validar">
+            <h2>Add Novo Filme</h2>
+            <form action="">
+                <input type="text" name="name" id="name-input" placeholder="nome do filme..." required>
+                <input type="text" name="imagem" id="imagem-input" placeholder="link da imagem de capa..." required>
+                <input type="text" name="link" id="link-input" placeholder="link do trailer..." required>
+                <input type="text" name="review" id="review-input" placeholder="link pagina de review..." required>
+                <input type="submit" value="Adicionar">
+            </form>
+            <span id="msg-error"></span>
         </div>
     </div>
 
