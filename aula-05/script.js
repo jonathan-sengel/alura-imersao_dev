@@ -3,7 +3,6 @@
 //#region VARIABLES DECLARATION
 const baseImgUrl = 'https://image.tmdb.org/t/p/w300/';
 const urlNowPlaying = 'https://api.themoviedb.org/3/movie/now_playing?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=1'
-
 const urlPopular = 'https://api.themoviedb.org/3/movie/popular?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=2';
 
 const urlUpcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=1'

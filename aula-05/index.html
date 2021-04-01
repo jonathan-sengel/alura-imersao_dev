@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Alura Cine</title>
+</head>
+
+<body onload="charge()">
+
+    <div class="header" id="home">
+        <div class="header__logo">
+            <h1>Alura <mark>Cine</mark></h1>
+        </div>
+        <div class="header__menu">
+            <ul class="header__list">
+                <a href="#">
+                    <li class="header__item" onclick="showHideMobileMenu()">Destaques</li>
+                </a>
+                <a href="#last-list">
+                    <li class="header__item" onclick="showHideMobileMenu()">Lançamentos</li>
+                </a>
+                <a href="#popular">
+                    <li class="header__item" onclick="showHideMobileMenu()">Populares</li>
+                </a>
+                <a href="#top-r">
+                    <li class="header__item" onclick="showHideMobileMenu()">Mais Votados</li>
+                </a>
+            </ul>
+        </div>
+        <div class="menu__mobile">
+            <span id="img-menu" class="material-icons" onclick="showHideMobileMenu()">menu</span>
+        </div>
+    </div>
+
+    <div class=" featured-list">
+        <div class="featured-list__container">
+            <div class="featured-list__content"></div>
+            <div class="wrapper">
+                <div class="featured-list__swatch-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="movies-list movies-list__popular">
+        <span id="popular">Todo mundo está assistindo:</span>
+        <div class="movies__container"></div>
+    </div>
+
+    <div class="movies-list movies-list__latest">
+        <span id="last-list">Últimos lançamentos:</span>
+        <div class="movies__container"></div>
+    </div>
+
+    
+    <div class="movies-list movies-list__top-rated">
+        <span id="top-r">Melhores avaliados:</span>
+        <div class="movies__container"></div>
+    </div>
+    <a class="return-home" href="#home">Voltar ao Inicio</a>
+
+    <div class="modal-container">
+        <div class="modal-box">
+            <input class="search-input" type="text" name="search" id="search">
+            <div class="result-container">
+                <ul class="result-list">
+                </ul>
+            </div>
+            <input class='btn-add-movie' type="button" value="Validar">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="search.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+html {
+    font-size: 63.5%;
+    font-family: 'Titillium Web', sans-serif;
+    color: #dcdcdd;
+    background-color: #0d1b2a;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+mark {
+    padding: 0 10px;
+    background-color: #f25c54;
+}
+
+a {
+    color: #dcdcdd;
+}
+
+a:visited {
+    color: #dcdcdd;
+}
+
+/*==================== HEADER ====================*/
+
+.header {
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: #0d1b2aaf;
+}
+
+.header .header__logo {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.header .header__list {
+    list-style: none;
+    display: flex;
+    z-index: 2;
+}
+
+.header .header__menu .header__item, .return-home {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.5rem;
+    background-color: #1b263b;
+    transition: background-color .6s;
+}
+
+.header .header__menu .header__item:hover, .return-home:hover {
+    cursor: pointer;
+    background-color: #dcdcdd;
+    color: #1b263b;
+    transform: scale(1.1);
+}
+
+.return-home {
+    margin-top: 50px;
+}
+
+.menu__mobile {
+    display: none;
+}
+
+#img-menu {
+    font-size: 42px;
+}
+
+#img-menu:hover {
+    cursor: pointer;
+}
+
+/*==================== FEATURED ====================*/
+
+.featured-list {
+    width: 100%;
+    height: 88vh;
+    display: flex;
+}
+
+.featured-list .featured-list__container {
+    width: 100%;
+    position: relative;
+}
+
+.featured-list__container .featured-list__content {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    padding-left: 20px;
+}
+
+.featured-list__container .featured-list__swatch-bar {
+    width: 100%;
+    height: 45rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 25px;
+    overflow-x: scroll;
+}
+
+.featured-list__swatch-bar .swatch-bar__movie {
+    position: relative;
+    transition: .5s;
+}
+
+.featured-list__swatch-bar .swatch-bar__movie:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+
+.swatch-bar__movie .swatch-bar__movie__title {
+    padding: 0 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.50);
+    z-index: 1;
+}
+
+.swatch-bar__movie__poster {
+    width: 29rem;
+    height: 43rem;
+    margin-right: 20px;
+    border: 6px solid rgba(0, 0, 0, 0.377);
+}
+
+.swatch-bar__movie__poster--active {
+    border-color: #f25c54;
+}
+
+/*==================== LIST MOVIES ====================*/
+
+.movie__details--disabled {
+    opacity: 0;
+    display: none;
+}
+
+.movies-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    padding-left: 20px;
+}
+
+.movies-list>span {
+    font-size: 3rem;
+    padding-bottom: 20px;
+}
+
+.movies__container {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.movies-list__movie {
+    min-width: 290px;
+    height: 430px;
+    margin-right: 20px;
+    background-color: #1b263b;
+    position: relative;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+}
+
+.movie__media {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.movie__media__rating {
+    font-size: 2rem;
+    padding: 0 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: tomato;
+    box-shadow: 2px 2px 10px black
+}
+
+.movie__media__poster {
+    width: 100%;
+    object-fit: none;
+}
+
+.movie__details {
+    width: 100%;
+    height: 50%;
+    padding: 10px;
+    position: absolute;
+    bottom: 62px;
+    font-size: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.70);
+}
+
+.movie__details__title {
+    font-size: 2.2rem;
+}
+
+.movie__details__release {
+    position: absolute;
+    bottom: 10px;
+}
+
+.movie__more__info {
+    position: absolute;
+    width: 40px;
+    bottom: 0px;
+    content: url('https://svgshare.com/i/VV2.svg');
+}
+
+.movie__more__info:hover {
+    cursor: pointer;
+}
+
+/* personalizar a barra em geral, aqui estou definindo 10px de largura para a barra vertical e 10px de altura para a barra horizontal */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 251, 251, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00A651;
+}
+
+@media only screen and (max-width:845px) {
+    body {
+        overflow-x: hidden;
+    }
+    .header .header__logo {
+        font-size: 1.5rem;
+    }
+    .menu__mobile {
+        display: block
+    }
+    .movies-list__movie {
+        min-width: 16.5rem;
+        height: 26.5rem;
+        margin-bottom: 10px;
+    }
+    .header .header__list {
+        position: absolute;
+        display: block;
+        right: 20px;
+        top: 8vh;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        background: rgba(245, 245, 245, 0.705);
+        transition: .5s;
+    }
+    .header .header__list--active {
+        width: 150px;
+        height: 225px;
+    }
+    .movie__media__poster {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        overflow-x: hidden;
+    }
+    .movie__more__info {
+        width: 20px;
+    }
+    .movies-list>span {
+        font-size: 1.8rem;
+    }
+    .movie__media__rating {
+        font-size: 1.6rem;
+    }
+    .movie__details {
+        font-size: 1.2rem;
+        height: 100%;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .movie__details__title {
+        font-size: 1.4rem;
+    }
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    .movies-list {
+        margin-top: 50px;
+    }
+    .movie__details__release {
+        bottom: 20px;
+    }
+    .swatch-bar__movie__poster {
+        width: 16.5rem;
+        height: 26.5rem;
+        object-fit: cover;
+    }
+    .swatch-bar__movie__title {
+        display: none;
+    }
+    .featured-list__container .featured-list__swatch-bar {
+        height: 27.5rem;
+    }
+}
+
+.modal-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-box {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d1b2a;
+    padding: 30px;
+}
+
+.search-input {
+    font-size: 20px;
+    padding: 8px;
+}
+
+.result-container {
+    margin-top: 20px;
+    overflow-y: hidden;
+}
+
+.result-list {
+    list-style: none;
+    height: 100%;
+}
+
+.result-list>li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 5px 0;
+    padding: 5px;
+    color: #0d1b2a;
+    background-color: #dcdcdd;
+    transition: background-color, color 0.5s
+}
+
+.result-list>li:hover {
+    cursor: pointer;
+    background-color: #0d1b2a;
+    color: #dcdcdd;
+}
+
+.list-item--clicked{
+    border: 4px solid #00A651;
+}
