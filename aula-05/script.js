@@ -9,10 +9,18 @@ const urlUpcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=eda6d9a
 
 const urlTopRated = 'https://api.themoviedb.org/3/movie/top_rated?api_key=eda6d9a6a9d492a2c3205744b78a5d19&language=pt-BR&page=3';
 
+let $modalBtnAdd = document.querySelector('input[type="submit"]');
+$modalBtnAdd.addEventListener('click', addMovie);
+
+let $personalBtnAdd = document.querySelector('.add-movie');
+$personalBtnAdd.addEventListener('click', showModalBox);
+
+
 let moviesInCinema;
 let popularMovies;
 let upComingMovies;
 let topRatedMovies;
+let favoriteMovies = [];
 
 //#endregion
 
@@ -24,6 +32,12 @@ async function charge() {
     generateListCatalog('.movies-list.movies-list__popular', popularMovies);
     generateListCatalog('.movies-list.movies-list__latest', upComingMovies);
     generateListCatalog('.movies-list.movies-list__top-rated', ordenar(topRatedMovies));
+    if(!!localStorage.movies){
+        favoriteMovies = JSON.parse(localStorage.getItem('movies'));
+        favoriteMovies.forEach(movie =>{
+            showMovieOnPage(movie);
+        })
+    }
 }
 
 function showHideMobileMenu(e) {
@@ -261,4 +275,133 @@ async function receberVariaveis() {
     popularMovies = await getPopularList();
     upComingMovies = await getUpcomingList();
     topRatedMovies = await getTopRatedList();
+}
+
+
+//=================================== TRECHO ADICIONADO PARA ADD FILME FAVORITO ==========================================*/
+
+function createFavoriteMovie(name, trailerLink, imageUrl, review) {
+
+    const movie = {};
+    movie.name = name;
+    movie.link = trailerLink;
+    movie.image = imageUrl;
+    movie.review = review;
+
+    favoriteMovies.push(movie);
+    localStorage.setItem('movies', JSON.stringify(favoriteMovies));
+    return movie;
+}
+
+function showMovieOnPage(movie) {
+
+    let div1 = document.createElement('div');
+    let divMedia = document.createElement('div');
+    let imgMedia = document.createElement('img');
+
+    div1.classList.add('movies-list__movie');
+    divMedia.classList.add('movie__media');
+    imgMedia.classList.add('movie__media__poster');
+
+    imgMedia.src = movie.image;
+    imgMedia.alt = movie.name;
+    imgMedia.addEventListener('click', openModalInfo);
+    divMedia.appendChild(imgMedia);
+
+    div1.dataset.tralierLink = movie.link;
+    div1.dataset.reviewLink = movie.review;
+    div1.appendChild(divMedia);
+
+    document.querySelector('.movies__container').prepend(div1);
+}
+
+function addMovie(e) {
+    e.preventDefault();
+    let $movieName = document.querySelector('input[name="name"]').value
+    let $movieTrailerLink = document.querySelector('input[name="link"]').value
+    let $movieImageUrl = document.querySelector('input[name="imagem"]').value
+    let $movieReview = document.querySelector('input[name="review"]').value;
+
+    let inputs = Array.from(document.querySelectorAll('input[type="text"]'));
+    let errMsg = 'Preencha todos os campos!!';
+
+
+    if (inputs.every(el => el.value != '')) {
+
+        if (!$movieImageUrl.endsWith('.jpg') && !$movieImageUrl.endsWith('.png') && !$movieImageUrl.endsWith('.jfif') && !$movieImageUrl.endsWith('.gif')) {
+            throwError('link da imagem é inválida');
+        }
+        else if ($movieTrailerLink.substr(0, 12) != 'https://www.' && $movieTrailerLink.substr(0, 16) != 'https://youtu.be' && $movieTrailerLink.substr(0, 32) != 'https://www.youtube.com/watch?v=') {
+            throwError('link do trailer é inválido');
+        }
+        else if ($movieReview.substr(0, 12) != 'https://www.') {
+            throwError('link do review é inválido');
+        } else {
+            throwError('sucesso');
+            let obj = createFavoriteMovie($movieName, $movieTrailerLink, $movieImageUrl, $movieReview);
+            showMovieOnPage(obj);
+            resetClear();
+        }
+    } else {
+        throwError('preencha todos os campos!!');
+    }
+}
+
+function resetClear() {
+    document.querySelector('input[name="name"]').value = '';
+    document.querySelector('input[name="link"]').value = '';
+    document.querySelector('input[name="imagem"]').value = ''
+    document.querySelector('input[name="review"]').value = '';
+    document.querySelector('.modal-container').classList.remove('display--flex');
+    document.querySelector('.modal-container').classList.add('display--none');
+    document.querySelector('.modal-box').classList.remove('display--flex');
+    document.querySelector('.modal-box').classList.add('display--none');
+    document.querySelector('.actions').innerHTML = '';
+    document.querySelector('.modal-info').classList.remove('display--flex');
+    document.querySelector('.modal-info').classList.add('display--none');
+    document.querySelector('.trailer').innerHTML = '';
+    document.querySelector('#msg-error').innerHTML='';
+}
+
+function showModal() {
+    document.querySelector('.modal-container').classList.remove('display--none');
+    document.querySelector('.modal-container').classList.add('display--flex');
+}
+
+function showModalBox() {
+    showModal();
+    document.querySelector('.modal-box').classList.remove('display--none');
+    document.querySelector('.modal-box').classList.add('display--flex');
+}
+
+function throwError(msg) {
+    document.querySelector('#msg-error').innerHTML = msg;
+}
+
+function openModalInfo(e) {
+    showModal();
+    document.querySelector('.modal-info').classList.remove('display--none');
+    document.querySelector('.modal-info').classList.add('display--flex');
+
+    let parentElem = e.target.closest('.movies-list__movie');
+
+    let $trailer = document.querySelector('.trailer');
+
+    $trailer.innerHTML = `<iframe width="700" height="395" src="${parentElem.dataset.tralierLink.replaceAll('watch?v=', 'embed/')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    let $actions = document.querySelector('.actions');
+    let a1 = document.createElement('a');
+    let span1 = document.createElement('span');
+
+    a1.href = parentElem.dataset.reviewLink;
+    a1.target = '_blank';
+    a1.innerText = 'Ver review do Filme';
+    a1.classList.add('btn-default', 'see-review');
+
+    span1.innerText = 'Fechar';
+    span1.addEventListener('click', resetClear);
+    span1.classList.add('btn-default', 'close-info');
+
+    $actions.appendChild(a1);
+    $actions.appendChild(span1);
 }
