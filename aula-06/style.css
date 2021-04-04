@@ -13,7 +13,7 @@ body {
     align-items: center;
     max-width: 100vw;
     height: 100vh;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.699) , rgba(0, 0, 0, 0.150)) , url('https://image.winudf.com/v2/image1/Y29tLmFuZHJvbW8uZGV2ODg0MTM0LmFwcDEwMzA0Nzlfc2NyZWVuXzRfMTU2OTcwMTYxNV8wODA/screen-4.jpg?fakeurl=1&type=.jpg');
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0.150)), url('https://image.winudf.com/v2/image1/Y29tLmFuZHJvbW8uZGV2ODg0MTM0LmFwcDEwMzA0Nzlfc2NyZWVuXzRfMTU2OTcwMTYxNV8wODA/screen-4.jpg?fakeurl=1&type=.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -24,7 +24,7 @@ body {
     margin: 30px;
 }
 
-main{
+main {
     width: 100%;
 }
 
@@ -37,6 +37,7 @@ main{
 }
 
 .players-options {
+    outline: 0;
     padding: 10px 70px 10px 13px;
     margin-right: 20px;
     border: 1px solid #e3e3e3;
@@ -49,12 +50,16 @@ main{
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+option{
+    margin: 10px;
+    padding: 10px;
+}
 
 .btn-add {
     padding: 10px;
 }
 
-.table-container{
+.table-container {
     max-width: 100%;
     max-height: 500px;
     overflow-y: scroll;
@@ -63,15 +68,16 @@ main{
     overflow-y: auto;
 }
 
-
-thead tr{
+thead tr {
     background-color: #293241ce;
 }
+
 tbody tr {
     background-color: #293241ce;
     font-size: 14px;
 }
-tr:hover{
+
+tr:hover {
     cursor: pointer;
 }
 
@@ -80,18 +86,89 @@ th, td {
     text-align: center;
 }
 
-img{
+img {
     width: 36px;
 }
 
-.actions input:first-child{
+.actions input:first-child {
     margin-right: 10px;
 }
-.actions input{
-    
+
+.actions input {
     padding: 4px;
 }
 
-.selected{
+.selected {
+    color: #444444;
     background-color: #06d6a0;
+}
+
+.piscar {
+    animation: pisca-pisca 0.5s ease-in-out infinite both;
+    -webkit-animation: pisca-pisca 0.5s ease-in-out infinite both;
+    background-color: tomato;
+    border: 1px solid transparent;
+    color: white;
+}
+
+@keyframes pisca-pisca {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@-webkit-keyframes pisca-pisca {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
 }
