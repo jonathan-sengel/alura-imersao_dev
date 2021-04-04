@@ -60,8 +60,8 @@ function addPlayerRow(player, key) {
 
     let tr = document.createElement('tr');
     let tdHtml = `<td><img src=${player.pic}></td>`;
-    tdHtml += `<td>${player.name}</td>`;
-    tdHtml += `<td>${player.pts}</td>`;
+    tdHtml += `<td class="names">${player.name}</td>`;
+    tdHtml += `<td >${player.pts}</td>`;
     tdHtml += `<td>${player.wins}</td>`;
     tdHtml += `<td>${player.draw}</td>`;
     tdHtml += `<td>${player.defeats}</td>`;
@@ -113,7 +113,6 @@ function actionButton(e, key, state) {
             players[player1].defeats += 1;
         }
 
-
         sumPontos(player1);
         sumPontos(player2);
         localStorage.setItem('jogadores', JSON.stringify(players));
@@ -121,7 +120,6 @@ function actionButton(e, key, state) {
         updatePlayer(player2);
     }
 }
-
 
 function updatePlayer(key) {
 

@@ -10,47 +10,49 @@
 </head>
 
 <body>
-    <header>
-        <div class="title">
-            <h1>Mario Kart Classification</h1>
-        </div>
-    </header>
-
-    <main>
-        <section class="add-driver">
-            <select class="players-options" name="players" id="">
-                <option value="bowser">Bowser</option>
-                <option value="donkeykong">Donkey Kong</option>
-                <option value="luigi">Luigi</option>
-                <option value="mario">Mario</option>
-                <option value="peach">Peach</option>
-                <option value="toad">Toad</option>
-                <option value="wario">Wario</option>
-                <option value="yoshi">Yoshi</option>
-            </select>
-            <input class="btn-add" type="button" value="Adicionar">
-        </section>
-        <section class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>3x4</th>
-                        <th>Nome</th>
-                        <th>Pontos</th>
-                        <th>Vitórias</th>
-                        <th>Empates</th>
-                        <th>Derrotas</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-    </main>
+    <div class="container">
+        <header>
+            <div class="title">
+                <h1>Mario Kart Classification</h1>
+            </div>
+        </header>
+        <main>
+            <section class="add-driver">
+                <select class="players-options" name="players" id="">
+                    <option value="bowser">Bowser</option>
+                    <option value="donkeykong">Donkey Kong</option>
+                    <option value="luigi">Luigi</option>
+                    <option value="mario">Mario</option>
+                    <option value="peach">Peach</option>
+                    <option value="toad">Toad</option>
+                    <option value="wario">Wario</option>
+                    <option value="yoshi">Yoshi</option>
+                </select>
+                <input class="btn-add" type="button" value="Adicionar">
+            </section>
+            <section class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>3x4</th>
+                            <th class="names">Nome</th>
+                            <th >Pontos</th>
+                            <th>Vitórias</th>
+                            <th>Empates</th>
+                            <th>Derrotas</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
 
     <footer>
-
+        <h3 id="footer-info">Coded by <mark><a href="https://github.com/jonathan-sengel" target="_blank">Jonathan
+                    Engel</a></mark></h3>
     </footer>
     <script src="script.js"></script>
 </body>
