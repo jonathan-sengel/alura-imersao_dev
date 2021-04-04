@@ -386,8 +386,11 @@ function openModalInfo(e) {
     let parentElem = e.target.closest('.movies-list__movie');
 
     let $trailer = document.querySelector('.trailer');
+    let trailerLink = parentElem.dataset.tralierLink;
+    console.log(trailerLink);
+    let trailerLinkEdited = trailerLink.substr(0,43);
 
-    $trailer.innerHTML = `<iframe width="700" height="395" src="${parentElem.dataset.tralierLink.replaceAll('watch?v=', 'embed/')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    $trailer.innerHTML = `<iframe width="700" height="395" src="${trailerLinkEdited.replaceAll('watch?v=', 'embed/')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 
     let $actions = document.querySelector('.actions');
     let a1 = document.createElement('a');

@@ -24,6 +24,8 @@ const characters = {
 
 let $btnAdd = document.querySelector('.btn-add');
 $btnAdd.addEventListener('click', createNewPlayer);
+let $btnClear = document.querySelector('.btn-clear');
+$btnClear.addEventListener('click', clearPlayers);
 
 
 function createNewPlayer() {
@@ -134,6 +136,14 @@ function updatePlayer(key) {
     empates.innerHTML = players[key].draw;
 }
 
-function sumPontos(key){
+function sumPontos(key) {
     players[key].pts = players[key].wins * 3 + players[key].draw;
+}
+
+function clearPlayers() {
+    players = {};
+    localStorage.setItem('jogadores', JSON.stringify(players));
+
+    let $table = document.querySelector('.table-container tbody');
+    $table.innerHTML = '';
 }

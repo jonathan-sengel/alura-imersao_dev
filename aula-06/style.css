@@ -20,10 +20,12 @@ body {
     overflow: hidden;
     color: #e0fbfc;
 }
-.container{
+
+.container {
     width: 100%;
     text-align: center;
 }
+
 .title {
     margin: 30px;
 }
@@ -62,6 +64,14 @@ option {
 
 .btn-add {
     padding: 10px;
+    margin-right: 10px;
+    ;
+}
+
+.btn-clear {
+    margin-top: 20px;
+    padding: 10px;
+    margin-right: 10px;
 }
 
 .table-container {
@@ -69,7 +79,8 @@ option {
     max-height: 500px;
     overflow-y: scroll;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     overflow-y: auto;
 }
 
@@ -129,9 +140,10 @@ a {
 a:visited {
     color: #000814;
 }
+
 footer {
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 70px;
 }
 
 @keyframes pisca-pisca {
@@ -205,7 +217,7 @@ footer {
         padding: 10px 40px 10px 10px;
         font-size: 12px;
     }
-    .btn-add {
+    .btn-add, .btn-clear {
         font-size: 12px;
     }
     .names {
