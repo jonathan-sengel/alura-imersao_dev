@@ -39,12 +39,15 @@
 
             <div class="actions-container">
                 <div class="primary-actions">
-                    <input id="sortear" type="button" value="Sortear">
+                    <input id="sortear" type="button" value="Sortear" disabled>
                 </div>
                 <div class="secondary-actions">
-                    <input class = "btn-strength" data-att="str" type="button" value="Força"onclick="validarAcao(this.dataset.att)">
-                    <input class = "btn-speed" data-att="speed" type="button" value="Velocidade"onclick="validarAcao(this.dataset.att)">
-                    <input class = "btn-intelligence" data-att="int"type="button" value="Inteligência" onclick="validarAcao(this.dataset.att)">
+                    <input class="btn-strength" data-att="str" type="button" value="Força"
+                        onclick="validarAcao(this.dataset.att)" disabled>
+                    <input class="btn-speed" data-att="speed" type="button" value="Velocidade"
+                        onclick="validarAcao(this.dataset.att)" disabled>
+                    <input class="btn-intelligence" data-att="int" type="button" value="Inteligência"
+                        onclick="validarAcao(this.dataset.att)" disabled>
                 </div>
             </div>
 
@@ -66,7 +69,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>

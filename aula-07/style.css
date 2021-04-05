@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -46,7 +45,7 @@ main {
 }
 
 .cards-container {
-    width: 100%;
+    width: 800px;
     display: flex;
     justify-content: space-around;
 }
@@ -85,7 +84,7 @@ main {
     color: black;
 }
 
-.stats{
+.stats {
     position: absolute;
     bottom: 7px;
     left: 7px;
@@ -102,7 +101,7 @@ main {
     background-color: #272424be;
 }
 
-.name{
+.name {
     text-align: center;
     background-color: #C6985A;
     color: whitesmoke;
@@ -116,7 +115,7 @@ main {
     transition: 0.6s 0.4s;
 }
 
-.name-show{
+.name-show {
     opacity: 1;
     top: 0;
 }
@@ -138,8 +137,6 @@ main {
     color: white;
 }
 
-
-
 .actions-container {
     width: 120px;
     display: flex;
@@ -153,11 +150,13 @@ input {
     margin: 5px;
     padding: 10px;
 }
+
 .primary-actions {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
+
 .secondary-actions {
     width: 100%;
     display: flex;
@@ -165,13 +164,13 @@ input {
 }
 
 .flip {
-    transform: rotateX(180deg) ;
+    transform: rotateX(180deg);
 }
 
-.scale-up{
-    transform: scale(1.2);
+.scale-up {
+    transform: scale(1.1);
 }
-.brightness-low{
+
+.brightness-low {
     filter: brightness(0.2);
-    
 }

@@ -1,33 +1,39 @@
 'use strict'
-document.querySelector('#sortear').addEventListener('click', distribuirCartas);
-let cards = document.querySelectorAll('.card-inner');
-cards.forEach(card => {
-    card.addEventListener('click', flipCard);
-});
-
+let $btnSortear = document.querySelector('#sortear');
+$btnSortear.addEventListener('click', distribuirCartas);
 let $playerCardElement = document.querySelector('#card-player');
 let $cpuCardElement = document.querySelector('#card-cpu');
+let playerCards;
+let cpuCards;
+
 
 onload = () => {
     distribuirCartas();
 }
 
-let playerCards;
-let cpuCards;
+
 
 async function distribuirCartas() {
-
     let playerCard = await generateCard();
     playerCards = playerCard;
     let cpuCard = await generateCard();
     cpuCards = cpuCard;
-
     updateCardData($playerCardElement, playerCard);
     updateCardData($cpuCardElement, cpuCard);
 
-    $playerCardElement.classList.add('flip');
-    document.querySelectorAll('.name')[0].classList.add('name-show');
+    virarCartaJogador($playerCardElement);
 }
+
+function virarCartaJogador(cartaJogador) {
+
+    cartaJogador.classList.add('flip');
+    cartaJogador.querySelector('.name').classList.add('name-show');
+    document.querySelector('.btn-strength').disabled = false;
+    document.querySelector('.btn-speed').disabled = false;
+    document.querySelector('.btn-intelligence').disabled = false;
+    document.querySelector('#sortear').disabled = true;
+}
+
 
 function updateCardData(cardElement, charCard) {
 
@@ -47,7 +53,6 @@ function updateCardData(cardElement, charCard) {
 async function generateCard() {
 
     let char = {};
-
     await fetch(`https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/id/${aleatoryNumber()}.json`)
         .then(response => response.json())
         .then(heroe => {
@@ -60,51 +65,86 @@ async function generateCard() {
     return char;
 }
 
+function acaoVitoriaDerrota(winnerPlayer, loserPlayer) {
+    setTimeout(() => {
+        winnerPlayer.closest('.card').classList.add('scale-up');
+        loserPlayer.closest('.card').classList.add('brightness-low');
+    }, 800);
+    setTimeout(() => {
+        winnerPlayer.closest('.card').classList.remove('scale-up');
+        loserPlayer.closest('.card').classList.remove('brightness-low');
+        winnerPlayer.classList.remove('flip');
+        loserPlayer.classList.remove('flip');
+        winnerPlayer.querySelector('.name').classList.remove('name-show');
+        loserPlayer.querySelector('.name').classList.remove('name-show');
+    }, 3000);
+    enableDisableActions();
+}
+
+function acaoEmpate(player1, player2) {
+    setTimeout(() => {
+        player1.closest('.card').classList.add('scale-up');
+        player2.closest('.card').classList.add('scale-up');
+    }, 800);
+    setTimeout(() => {
+        player1.closest('.card').classList.remove('scale-up');
+        player2.closest('.card').classList.remove('scale-up');
+        player1.classList.remove('flip');
+        player2.classList.remove('flip');
+        player1.querySelector('.name').classList.remove('name-show');
+        player2.querySelector('.name').classList.remove('name-show');
+    }, 3000);
+    enableDisableActions();
+}
+
 function validarAcao(atribute) {
     if (atribute == 'str') {
         if (playerCards.strength > cpuCards.strength) {
             console.log('ganhouu');
-            $cpuCardElement.classList.add('flip');
-            document.querySelectorAll('.name')[1].classList.add('name-show');
-            setTimeout(() => {
-                $playerCardElement.closest('.card').classList.add('scale-up');
-                $cpuCardElement.closest('.card').classList.add('brightness-low');
-            }, 800);
-            setTimeout(() => {
-                $playerCardElement.closest('.card').classList.remove('scale-up');
-                $cpuCardElement.closest('.card').classList.remove('brightness-low');
-                $playerCardElement.classList.remove('flip');
-                $cpuCardElement.classList.remove('flip');
-                document.querySelectorAll('.name')[0].classList.remove('name-show');
-                document.querySelectorAll('.name')[1].classList.remove('name-show');
-            }, 3000);
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
         }
         else if (playerCards.strength < cpuCards.strength) {
             console.log('perdeu');
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
             console.log('empate');
+            virarCartaJogador($cpuCardElement);
+            acaoEmpate($cpuCardElement, $playerCardElement);
         }
-        $cpuCardElement.classList.add('flip');
-        document.querySelectorAll('.name')[1].classList.add('name-show');
+
     }
     else if (atribute == 'speed') {
         if (playerCards.speed > cpuCards.speed) {
             console.log('ganhouu');
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
         }
         else if (playerCards.speed < cpuCards.speed) {
             console.log('perdeu');
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
             console.log('empate');
+            virarCartaJogador($cpuCardElement);
+            acaoEmpate($cpuCardElement, $playerCardElement);
         }
     }
     else if (atribute == 'int') {
         if (playerCards.intelligence > cpuCards.intelligence) {
             console.log('ganhouu');
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
         }
         else if (playerCards.intelligence < cpuCards.intelligence) {
             console.log('perdeu');
+            virarCartaJogador($cpuCardElement);
+            acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
             console.log('empate');
+            virarCartaJogador($cpuCardElement);
+            acaoEmpate($cpuCardElement, $playerCardElement);
         }
     }
 }
@@ -123,4 +163,13 @@ function aleatoryNumber() {
 function flipCard(e) {
     let $cardInner = e.target.closest('.card-inner');
     $cardInner.classList.toggle('flip');
+}
+
+function enableDisableActions() {
+    document.querySelector('.btn-strength').disabled = true;
+    document.querySelector('.btn-speed').disabled = true;
+    document.querySelector('.btn-intelligence').disabled = true;
+    setTimeout(() => {
+        document.querySelector('#sortear').disabled = false;
+    }, 3000);
 }
