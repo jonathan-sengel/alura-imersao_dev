@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Aula 07</title>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h1>Super Trunfo - Heróis</h1>
+        </div>
+    </header>
+    <main>
+
+        <section class="cards-container">
+
+            <div class="card">
+                <div id="card-player" class="card-inner">
+                    <div class="card-front">
+                        <div class="img-container">
+                            <img src="" alt="">
+                        </div>
+                        <div class="stats">
+                            <p class="strength"></p>
+                            <p class="speed"></p>
+                            <p class="intelligence"></p>
+                        </div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="card-back">
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-container">
+                <div class="primary-actions">
+                    <input id="sortear" type="button" value="Sortear">
+                </div>
+                <div class="secondary-actions">
+                    <input class = "btn-strength" data-att="str" type="button" value="Força"onclick="validarAcao(this.dataset.att)">
+                    <input class = "btn-speed" data-att="speed" type="button" value="Velocidade"onclick="validarAcao(this.dataset.att)">
+                    <input class = "btn-intelligence" data-att="int"type="button" value="Inteligência" onclick="validarAcao(this.dataset.att)">
+                </div>
+            </div>
+
+            <div class="card">
+                <div id="card-cpu" class="card-inner">
+                    <div class="card-front">
+                        <div class="img-container">
+                            <img src="" alt="">
+                        </div>
+                        <div class="stats">
+                            <p class="strength"></p>
+                            <p class="speed"></p>
+                            <p class="intelligence"></p>
+                        </div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="card-back">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <h3 id="footer-info">Coded by
+            <mark><a href="https://github.com/jonathan-sengel" target="_blank">Jonathan Engel</a></mark>
+        </h3>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
