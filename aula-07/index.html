@@ -17,29 +17,47 @@
     </header>
     <main>
 
+        <h2 class="game-state">0</h2>
         <section class="cards-container">
 
-            <div class="card">
-                <div id="card-player" class="card-inner">
-                    <div class="card-front">
-                        <div class="img-container">
-                            <img src="" alt="">
-                        </div>
-                        <div class="stats">
-                            <p class="strength"></p>
-                            <p class="speed"></p>
-                            <p class="intelligence"></p>
-                        </div>
-                        <div class="name"></div>
+            <div class="player1">
+                <div id = "score-p1" class="scoreboard">
+                    <div>
+                        <p>Vitorias</p>
+                        <p id="p1-wins">0</p>
                     </div>
-                    <div class="card-back">
+                    <div>
+                        <p>Derrotas</p>
+                        <p id="p1-loses">0</p>
+                    </div>
+                    <div>
+                        <p>Empates</p>
+                        <p id="p1-draw">0</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <span id="counter-p1" class="card-counter">0</span>
+                    <div id="card-player" class="card-inner">
+                        <div class="card-front">
+                            <div class="img-container">
+                                <img src="" alt="">
+                            </div>
+                            <div class="stats">
+                                <p class="strength"></p>
+                                <p class="speed"></p>
+                                <p class="intelligence"></p>
+                            </div>
+                            <div class="name"></div>
+                        </div>
+                        <div class="card-back">
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="actions-container">
                 <div class="primary-actions">
-                    <input id="sortear" type="button" value="Sortear" disabled>
+                    <input id="sortear" type="button" value="Sortear">
                 </div>
                 <div class="secondary-actions">
                     <input class="btn-strength" data-att="str" type="button" value="Força"
@@ -51,20 +69,38 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div id="card-cpu" class="card-inner">
-                    <div class="card-front">
-                        <div class="img-container">
-                            <img src="" alt="">
+            <div class="player2">
+
+                <div class="card">
+                    <span id="counter-p2" class="card-counter">0</span>
+                    <div id="card-cpu" class="card-inner">
+                        <div class="card-front">
+                            <div class="img-container">
+                                <img src="" alt="">
+                            </div>
+                            <div class="stats">
+                                <p class="strength"></p>
+                                <p class="speed"></p>
+                                <p class="intelligence"></p>
+                            </div>
+                            <div class="name"></div>
                         </div>
-                        <div class="stats">
-                            <p class="strength"></p>
-                            <p class="speed"></p>
-                            <p class="intelligence"></p>
+                        <div class="card-back">
                         </div>
-                        <div class="name"></div>
                     </div>
-                    <div class="card-back">
+                </div>
+                <div id= "score-p2" class="scoreboard">
+                    <div>
+                        <p>Vitorias</p>
+                        <p id="p2-wins">0</p>
+                    </div>
+                    <div>
+                        <p>Derrotas</p>
+                        <p id="p2-loses">0</p>
+                    </div>
+                    <div>
+                        <p>Empates</p>
+                        <p id="p2-draw">0</p>
                     </div>
                 </div>
             </div>
