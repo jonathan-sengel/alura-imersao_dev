@@ -72,6 +72,28 @@ main {
     width: auto;
     display: flex;
     justify-content: space-around;
+    transition: filter 2s;
+}
+
+.cards-container.desfoque {
+    filter: blur(4px) brightness(.4);
+}
+
+.tabuleiro {
+    display: flex;
+    align-items: center;
+}
+
+.scoreboard.game-over1 {
+    transform: translateX(280px) scale(1.5);
+    z-index: 99;
+    opacity: 1;
+}
+
+.scoreboard.game-over2 {
+    transform: translateX(-280px) scale(1.5);
+    z-index: 99;
+    opacity: 1;
 }
 
 .scoreboard {
@@ -84,6 +106,8 @@ main {
     width: 110px;
     height: 80%;
     color: #2c2a2a;
+    opacity: .2;
+    transition: 2s;
 }
 
 .scoreboard>div {
@@ -92,7 +116,7 @@ main {
     flex-direction: column;
     align-items: center;
     font-size: 22px;
-    background-color: #f8f7ff46;
+    background-color: #f8f7ff;
     border-radius: 8px;
     font-weight: 600;
 }
@@ -102,13 +126,12 @@ main {
 }
 
 .scoreboard>div>p:nth-child(2) {
-    font-size: 26px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 .card {
-    width: 240px;
-    height: 345px;
+    width: 270px;
+    height: 388px;
     perspective: 1000px;
     transition: 1s
 }
@@ -120,7 +143,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    
     z-index: 99;
     font-size: 18px;
     border-radius: 100%;
@@ -129,11 +151,12 @@ main {
     background-color: #f8f7ff;
 }
 
-#counter-p1{
-    top:-10px;
+#counter-p1 {
+    top: -10px;
     left: -10px;
 }
-#counter-p2{
+
+#counter-p2 {
     top: -10px;
     right: -10px;
 }
@@ -161,6 +184,8 @@ main {
 
 .card-front {
     background: url(media/verso\ carta.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     transform: rotateX(180deg);
     color: black;
 }
@@ -169,7 +194,7 @@ main {
     position: absolute;
     bottom: 7px;
     left: 7px;
-    width: 226px;
+    width: 256px;
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -215,6 +240,8 @@ main {
 
 .card-back {
     background: url(media/verso\ carta.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     color: white;
 }
 
@@ -222,8 +249,7 @@ main {
     width: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
     margin: 0 20px;
 }
 
@@ -255,4 +281,54 @@ input {
 
 .brightness-low {
     filter: brightness(0.2);
+}
+
+@media only screen and (max-width:768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+    .card {
+        /* transform: scale(0.7); */
+    }
+    .actions-container {
+        order: -1;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 20px 0;
+    }
+    .scoreboard {
+        width: auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        order: 1;
+        margin: 20px 0;
+    }
+    .scoreboard>div {
+        flex-direction: row;
+        width: 50px;
+        justify-content: space-between;
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+    .scoreboard>div>p:first-child {
+        margin: 0;
+    }
+    .scoreboard>div>p:nth-child(2) {
+        margin: 0;
+    }
+    .name-show {
+        top: -393px;
+    }
+    .player1, .player2 {
+        flex-direction: column;
+    }
+    .game-state{
+        margin: 0;
+        font-size: 32px;
+    }
+    .title h1{
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
 }

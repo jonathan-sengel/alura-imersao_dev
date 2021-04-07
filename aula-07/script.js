@@ -1,47 +1,60 @@
 'use strict'
 
-let $btnSortear = document.querySelector('#sortear');
-$btnSortear.addEventListener('click', sacarCarta);
+// let $btnSortear = document.querySelector('#sortear');
+// $btnSortear.addEventListener('click', sacarCarta);
 let $estadoJogo = document.querySelector('.game-state');
 let $playerCardElement = document.querySelector('#card-player');
 let $cpuCardElement = document.querySelector('#card-cpu');
 let $scoreBoardP1 = document.querySelector('#score-p1');
 let $scoreBoardP2 = document.querySelector('#score-p2');
-let playerCards = [];
-let cpuCards = [];
+
+let player1 = {
+    deck: [],
+    wins: 0,
+    draw: 0,
+    loses: 0
+}
+
+let player2 = {
+    deck: [],
+    wins: 0,
+    draw: 0,
+    loses: 0
+}
+
 let currentPlayerCard;
 let currentCpuCard;
 
-onload = () => {
-    distribuirCartas();
+onload = async () => {
+    await distribuirCartas();
+    sacarCarta();
 }
-
-
 
 async function distribuirCartas() {
     for (let i = 0; i < 5; i++) {
         let playerCard = await generateCard();
-        playerCards.push(playerCard);
+        player1.deck.push(playerCard);
         let cpuCard = await generateCard();
-        cpuCards.push(cpuCard);
-        console.log(playerCards, cpuCards);
+        player2.deck.push(cpuCard);
     }
-    document.querySelector('#counter-p1').innerHTML = playerCards.length;
-    document.querySelector('#counter-p2').innerHTML = cpuCards.length;
+    document.querySelector('#counter-p1').innerHTML = player1.deck.length;
+    document.querySelector('#counter-p2').innerHTML = player2.deck.length;
 }
 
 function sacarCarta() {
-
-    if (playerCards.length > 0 && cpuCards.length > 0) {
-        currentPlayerCard = playerCards.shift();
-        currentCpuCard = cpuCards.shift();
+    if (player1.deck.length > 0 && player2.deck.length > 0) {
+        currentPlayerCard = player1.deck.shift();
+        currentCpuCard = player2.deck.shift();
         updateCardData($playerCardElement, currentPlayerCard);
         updateCardData($cpuCardElement, currentCpuCard);
-        console.log(playerCards, cpuCards);
+        console.log(player1.deck, player2.deck);
         virarCartaJogador($playerCardElement);
-        document.querySelector('#counter-p1').innerHTML = playerCards.length;
-        document.querySelector('#counter-p2').innerHTML = cpuCards.length;
+        document.querySelector('#counter-p1').innerHTML = player1.deck.length;
+        document.querySelector('#counter-p2').innerHTML = player2.deck.length;
+    } else {
+        gameOver();
     }
+
 }
 
 async function generateCard() {
@@ -64,7 +77,6 @@ function virarCartaJogador(cartaJogador) {
     document.querySelector('.btn-strength').disabled = false;
     document.querySelector('.btn-speed').disabled = false;
     document.querySelector('.btn-intelligence').disabled = false;
-    document.querySelector('#sortear').disabled = true;
 }
 
 function updateCardData(cardElement, charCard) {
@@ -85,60 +97,76 @@ function updateCardData(cardElement, charCard) {
 function validarAcao(atribute) {
     if (atribute == 'str') {
         if (currentPlayerCard.strength > currentCpuCard.strength) {
-            $estadoJogo.innerHTML = 'You Won';
+            $estadoJogo.innerHTML = '<mark>You Won</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
-            $scoreBoardP1.querySelector('div>p:nth-child(2)').innerHTML = 1;
         }
         else if (currentPlayerCard.strength < currentCpuCard.strength) {
-            $estadoJogo.innerHTML = 'You Lose';
+            $estadoJogo.innerHTML = '<mark>You Lose</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
-            $estadoJogo.innerHTML = 'Draw';
+            $estadoJogo.innerHTML = '<mark>Draw</mark>';
             virarCartaJogador($cpuCardElement);
             acaoEmpate($cpuCardElement, $playerCardElement);
         }
     }
     else if (atribute == 'speed') {
         if (currentPlayerCard.speed > currentCpuCard.speed) {
-            $estadoJogo.innerHTML = 'You Won';
+            $estadoJogo.innerHTML = '<mark>You Won</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
         }
         else if (currentPlayerCard.speed < currentCpuCard.speed) {
-            $estadoJogo.innerHTML = 'You Lose';
+            $estadoJogo.innerHTML = '<mark>You Lose</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
-            $estadoJogo.innerHTML = 'Draw';
+            $estadoJogo.innerHTML = '<mark>Draw</mark>';
             virarCartaJogador($cpuCardElement);
             acaoEmpate($cpuCardElement, $playerCardElement);
         }
     }
     else if (atribute == 'int') {
         if (currentPlayerCard.intelligence > currentCpuCard.intelligence) {
-            $estadoJogo.innerHTML = 'You Won';
+            $estadoJogo.innerHTML = '<mark>You Won</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($playerCardElement, $cpuCardElement);
         }
         else if (currentPlayerCard.intelligence < currentCpuCard.intelligence) {
-            $estadoJogo.innerHTML = 'You Lose';
+            $estadoJogo.innerHTML = '<mark>You Lose</mark>';
             virarCartaJogador($cpuCardElement);
             acaoVitoriaDerrota($cpuCardElement, $playerCardElement);
         } else {
-            $estadoJogo.innerHTML = 'Draw';
+            $estadoJogo.innerHTML = '<mark>Draw</mark>';
             virarCartaJogador($cpuCardElement);
             acaoEmpate($cpuCardElement, $playerCardElement);
         }
     }
+    setTimeout(() => {
+        sacarCarta();
+    }, 3750);
 }
 
 function acaoVitoriaDerrota(winnerPlayer, loserPlayer) {
+
+
     setTimeout(() => {
         winnerPlayer.closest('.card').classList.add('scale-up');
         loserPlayer.closest('.card').classList.add('brightness-low');
         $estadoJogo.classList.add('active');
+        if (winnerPlayer.dataset.player == 'player1') {
+            player1.wins++;
+            player2.loses++;
+            $scoreBoardP1.querySelector('#p1-wins').innerHTML = player1.wins;
+            $scoreBoardP2.querySelector('#p2-loses').innerHTML = player2.loses;
+
+        } else {
+            player1.loses++;
+            player2.wins++;
+            $scoreBoardP1.querySelector('#p1-loses').innerHTML = player1.loses;
+            $scoreBoardP2.querySelector('#p2-wins').innerHTML = player2.wins;
+        }
     }, 800);
     setTimeout(() => {
         winnerPlayer.closest('.card').classList.remove('scale-up');
@@ -148,26 +176,46 @@ function acaoVitoriaDerrota(winnerPlayer, loserPlayer) {
         winnerPlayer.querySelector('.name').classList.remove('name-show');
         loserPlayer.querySelector('.name').classList.remove('name-show');
         $estadoJogo.classList.remove('active');
+        if (player1.deck.length == 0 && player2.deck.length == 0) {
+            gameOver();
+        }
     }, 3000);
     enableDisableActions();
+
 }
 
-function acaoEmpate(player1, player2) {
+function acaoEmpate(p1, p2) {
     setTimeout(() => {
-        player1.closest('.card').classList.add('scale-up');
-        player2.closest('.card').classList.add('scale-up');
+        p1.closest('.card').classList.add('scale-up');
+        p2.closest('.card').classList.add('scale-up');
         $estadoJogo.classList.add('active');
+        player1.draw++;
+        player2.draw++;
+        $scoreBoardP1.querySelector('#p1-draw').innerHTML = player1.draw;
+        $scoreBoardP2.querySelector('#p2-draw').innerHTML = player2.draw;
     }, 800);
     setTimeout(() => {
-        player1.closest('.card').classList.remove('scale-up');
-        player2.closest('.card').classList.remove('scale-up');
-        player1.classList.remove('flip');
-        player2.classList.remove('flip');
-        player1.querySelector('.name').classList.remove('name-show');
-        player2.querySelector('.name').classList.remove('name-show');
+        p1.closest('.card').classList.remove('scale-up');
+        p2.closest('.card').classList.remove('scale-up');
+        p1.classList.remove('flip');
+        p2.classList.remove('flip');
+        p1.querySelector('.name').classList.remove('name-show');
+        p2.querySelector('.name').classList.remove('name-show');
         $estadoJogo.classList.remove('active');
+        if (player1.deck.length == 0 && player2.deck.length == 0) {
+            gameOver();
+        }
     }, 3000);
     enableDisableActions();
+
+}
+
+function gameOver() {
+    $estadoJogo.innerHTML = 'Game Over';
+    $estadoJogo.classList.add('active');
+    $scoreBoardP1.classList.add('game-over1');
+    $scoreBoardP2.classList.add('game-over2');
+    document.querySelector('.cards-container').classList.add('desfoque');
 }
 
 function aleatoryNumber() {
@@ -187,7 +235,4 @@ function enableDisableActions() {
     document.querySelector('.btn-strength').disabled = true;
     document.querySelector('.btn-speed').disabled = true;
     document.querySelector('.btn-intelligence').disabled = true;
-    setTimeout(() => {
-        document.querySelector('#sortear').disabled = false;
-    }, 3000);
 }

@@ -12,32 +12,31 @@
 <body>
     <header>
         <div class="title">
-            <h1>Super Trunfo - Heróis</h1>
+            <h1>Super Trunfo Heróis</h1>
         </div>
     </header>
     <main>
-
-        <h2 class="game-state">0</h2>
+        <h2 class="game-state"></h2>
         <section class="cards-container">
 
             <div class="player1">
-                <div id = "score-p1" class="scoreboard">
+                <div id="score-p1" class="scoreboard">
                     <div>
-                        <p>Vitorias</p>
+                        <p>V</p>
                         <p id="p1-wins">0</p>
                     </div>
                     <div>
-                        <p>Derrotas</p>
+                        <p>D</p>
                         <p id="p1-loses">0</p>
                     </div>
                     <div>
-                        <p>Empates</p>
+                        <p>E</p>
                         <p id="p1-draw">0</p>
                     </div>
                 </div>
                 <div class="card">
                     <span id="counter-p1" class="card-counter">0</span>
-                    <div id="card-player" class="card-inner">
+                    <div id="card-player" class="card-inner" data-player="player1">
                         <div class="card-front">
                             <div class="img-container">
                                 <img src="" alt="">
@@ -56,24 +55,24 @@
             </div>
 
             <div class="actions-container">
-                <div class="primary-actions">
+                <!-- <div class="primary-actions">
                     <input id="sortear" type="button" value="Sortear">
-                </div>
-                <div class="secondary-actions">
-                    <input class="btn-strength" data-att="str" type="button" value="Força"
-                        onclick="validarAcao(this.dataset.att)" disabled>
-                    <input class="btn-speed" data-att="speed" type="button" value="Velocidade"
-                        onclick="validarAcao(this.dataset.att)" disabled>
-                    <input class="btn-intelligence" data-att="int" type="button" value="Inteligência"
-                        onclick="validarAcao(this.dataset.att)" disabled>
-                </div>
+                </div> -->
+                <!-- <div class="secondary-actions"> -->
+                <input class="btn-strength" data-att="str" type="button" value="Força"
+                    onclick="validarAcao(this.dataset.att)" disabled>
+                <input class="btn-speed" data-att="speed" type="button" value="Velocidade"
+                    onclick="validarAcao(this.dataset.att)" disabled>
+                <input class="btn-intelligence" data-att="int" type="button" value="Inteligência"
+                    onclick="validarAcao(this.dataset.att)" disabled>
+                <!-- </div> -->
             </div>
 
             <div class="player2">
 
                 <div class="card">
                     <span id="counter-p2" class="card-counter">0</span>
-                    <div id="card-cpu" class="card-inner">
+                    <div id="card-cpu" class="card-inner" data-player="player2">
                         <div class="card-front">
                             <div class="img-container">
                                 <img src="" alt="">
@@ -89,17 +88,17 @@
                         </div>
                     </div>
                 </div>
-                <div id= "score-p2" class="scoreboard">
+                <div id="score-p2" class="scoreboard">
                     <div>
-                        <p>Vitorias</p>
+                        <p>V</p>
                         <p id="p2-wins">0</p>
                     </div>
                     <div>
-                        <p>Derrotas</p>
+                        <p>D</p>
                         <p id="p2-loses">0</p>
                     </div>
                     <div>
-                        <p>Empates</p>
+                        <p>E</p>
                         <p id="p2-draw">0</p>
                     </div>
                 </div>
