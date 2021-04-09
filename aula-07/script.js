@@ -7,7 +7,8 @@ let $playerCardElement = document.querySelector('#card-player');
 let $cpuCardElement = document.querySelector('#card-cpu');
 let $scoreBoardP1 = document.querySelector('#score-p1');
 let $scoreBoardP2 = document.querySelector('#score-p2');
-
+let audioFlipCard = new Audio('https://freesound.org/data/previews/536/536782_1415754-lq.mp3');
+let endGame = false;
 let player1 = {
     deck: [],
     wins: 0,
@@ -43,15 +44,15 @@ async function distribuirCartas() {
 
 function sacarCarta() {
     if (player1.deck.length > 0 && player2.deck.length > 0) {
+        audioFlipCard.play();
         currentPlayerCard = player1.deck.shift();
         currentCpuCard = player2.deck.shift();
         updateCardData($playerCardElement, currentPlayerCard);
         updateCardData($cpuCardElement, currentCpuCard);
-        console.log(player1.deck, player2.deck);
         virarCartaJogador($playerCardElement);
         document.querySelector('#counter-p1').innerHTML = player1.deck.length;
         document.querySelector('#counter-p2').innerHTML = player2.deck.length;
-    } else {
+    } else if(!endGame) {
         gameOver();
     }
 
@@ -95,6 +96,7 @@ function updateCardData(cardElement, charCard) {
 }
 
 function validarAcao(atribute) {
+    audioFlipCard.play();
     if (atribute == 'str') {
         if (currentPlayerCard.strength > currentCpuCard.strength) {
             $estadoJogo.innerHTML = '<mark>You Won</mark>';
@@ -149,7 +151,6 @@ function validarAcao(atribute) {
 }
 
 function acaoVitoriaDerrota(winnerPlayer, loserPlayer) {
-
 
     setTimeout(() => {
         winnerPlayer.closest('.card').classList.add('scale-up');
@@ -211,11 +212,31 @@ function acaoEmpate(p1, p2) {
 }
 
 function gameOver() {
+    endGame = true;
     $estadoJogo.innerHTML = 'Game Over';
     $estadoJogo.classList.add('active');
     $scoreBoardP1.classList.add('game-over1');
     $scoreBoardP2.classList.add('game-over2');
-    document.querySelector('.cards-container').classList.add('desfoque');
+    document.querySelector('.actions-container').classList.add('desfoque');
+    document.querySelectorAll('.card')[0].classList.add('desfoque');
+    document.querySelectorAll('.card')[1].classList.add('desfoque');
+
+    let finishText = '';
+    if (player1.wins > player2.wins) {
+        finishText = 'O Vencedor foi Player 1'
+        $scoreBoardP1.querySelectorAll('div').forEach(el => el.classList.add('win-color'));
+        $scoreBoardP2.querySelectorAll('div').forEach(el => el.classList.add('lose-color'));
+    } else if (player1.wins < player2.wins) {
+        finishText = 'O Vencedor foi CPU'
+        $scoreBoardP1.querySelectorAll('div').forEach(el => el.classList.add('lose-color'));
+        $scoreBoardP2.querySelectorAll('div').forEach(el => el.classList.add('win-color'));
+    } else {
+        finishText = 'Houve Empate'
+        $scoreBoardP1.querySelectorAll('div').forEach(el => el.classList.add('draw-color'));
+        $scoreBoardP2.querySelectorAll('div').forEach(el => el.classList.add('draw-color'));
+    }
+    $estadoJogo.innerHTML = `${finishText}<br><input class="btn-restart" type="button" value="Jogar Novamente"
+    onclick="restartGame()"></input>`
 }
 
 function aleatoryNumber() {
@@ -235,4 +256,34 @@ function enableDisableActions() {
     document.querySelector('.btn-strength').disabled = true;
     document.querySelector('.btn-speed').disabled = true;
     document.querySelector('.btn-intelligence').disabled = true;
+}
+
+async function restartGame() {
+    player1 = {
+        deck: [],
+        wins: 0,
+        draw: 0,
+        loses: 0
+    }
+    player2 = {
+        deck: [],
+        wins: 0,
+        draw: 0,
+        loses: 0
+    }
+    $estadoJogo.classList.remove('active');
+    $scoreBoardP1.classList.remove('game-over1');
+    $scoreBoardP2.classList.remove('game-over2');
+    document.querySelector('.actions-container').classList.remove('desfoque');
+    document.querySelectorAll('.card').forEach(el => el.classList.remove('desfoque'));
+    $scoreBoardP1.querySelectorAll('div').forEach(el => el.classList.remove('draw-color', 'win-color', 'lose-color'));
+    $scoreBoardP2.querySelectorAll('div').forEach(el => el.classList.remove('draw-color', 'win-color', 'lose-color'));
+    $scoreBoardP1.querySelector('#p1-wins').innerHTML = 0;
+    $scoreBoardP2.querySelector('#p2-wins').innerHTML = 0;
+    $scoreBoardP1.querySelector('#p1-loses').innerHTML = 0;
+    $scoreBoardP2.querySelector('#p2-loses').innerHTML = 0;
+    $scoreBoardP1.querySelector('#p1-draw').innerHTML = 0;
+    $scoreBoardP2.querySelector('#p2-draw').innerHTML = 0;
+
+    onload();
 }

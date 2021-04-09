@@ -53,8 +53,10 @@ main {
 }
 
 .game-state {
+    
+    text-align: center;
     opacity: 0;
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 50px;
     transition: opacity 0.8s;
 }
@@ -75,23 +77,24 @@ main {
     transition: filter 2s;
 }
 
-.cards-container.desfoque {
-    filter: blur(4px) brightness(.4);
+.desfoque {
+    filter: blur(4px);
 }
 
 .tabuleiro {
     display: flex;
     align-items: center;
+    
 }
 
 .scoreboard.game-over1 {
-    transform: translateX(280px) scale(1.5);
+    transform: translate(320px,0) scale(1.5);
     z-index: 99;
     opacity: 1;
 }
 
 .scoreboard.game-over2 {
-    transform: translateX(-280px) scale(1.5);
+    transform: translate(-320px,0) scale(1.5);
     z-index: 99;
     opacity: 1;
 }
@@ -108,6 +111,7 @@ main {
     color: #2c2a2a;
     opacity: .2;
     transition: 2s;
+    z-index: 10;
 }
 
 .scoreboard>div {
@@ -127,6 +131,16 @@ main {
 
 .scoreboard>div>p:nth-child(2) {
     margin-bottom: 5px;
+}
+
+.scoreboard>div.win-color{
+    background-color: #2a9d8f;
+}
+.scoreboard>div.lose-color{
+    background-color: #e76f51;
+}
+.scoreboard>div.draw-color{
+    background-color: #b7b7a4;
 }
 
 .card {
@@ -288,19 +302,18 @@ input {
         flex-direction: column;
     }
     .card {
-        /* transform: scale(0.7); */
+        width: 240px;
+        height: 345px;  /* transform: scale(0.7); */
     }
     .actions-container {
-        order: -1;
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
-        margin: 20px 0;
+        margin: 15px 0;
     }
     .scoreboard {
         width: auto;
         grid-template-columns: 1fr 1fr 1fr;
-        order: 1;
         margin: 20px 0;
     }
     .scoreboard>div {
@@ -317,7 +330,7 @@ input {
         margin: 0;
     }
     .name-show {
-        top: -393px;
+            top: -350px;
     }
     .player1, .player2 {
         flex-direction: column;
@@ -330,5 +343,16 @@ input {
         text-align: center;
         font-size: 40px;
         margin-bottom: 25px;
+    }
+
+    .scoreboard.game-over1 {
+        transform: translate(0,390px) scale(1.7);
+    }
+    
+    .scoreboard.game-over2 {
+        transform: translate(0,-390px) scale(1.7);
+    }
+    .stats{
+        width: 226px;
     }
 }
